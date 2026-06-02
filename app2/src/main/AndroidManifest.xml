@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        A custom signature-level permission declared by App2.
+        Only apps signed with the same certificate can be granted this permission.
+    -->
+    <permission
+        android:name="CUSTOM_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <!--
+        Requests use of the signature permission declared by App1.
+        Since App2 and App1 have different signing certificates, this permission will not be granted at runtime.
+    -->
+    <uses-permission android:name="CUSTOM_PERMISSION" />
+
+    <application
+        android:label="App2"
+        android:theme="@style/Theme.App2">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name=".feature.sync.AuthContentProvider"
+            android:authorities="${applicationId}.auth_provider"
+            android:exported="true"
+            android:permission="CUSTOM_PERMISSION" />
+
+        <receiver
+            android:name=".feature.sync.AuthBroadcastReceiver"
+            android:exported="true"
+            android:permission="CUSTOM_PERMISSION">
+            <intent-filter>
+                <action android:name="io.github.mtkw0127.ACTION_UPDATE" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
