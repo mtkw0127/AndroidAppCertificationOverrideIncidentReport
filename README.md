@@ -140,9 +140,7 @@ signatures=PackageSignatures{d9dcc31 version:3, signatures:[612cf88c], past sign
 >
 > App1's signature record has changed from `c4902d79` (ancestor key) to `612cf88c` (App2's rotated key) — **even though App1 was never reinstalled or modified**.
 >
-> Simply installing App2 caused Android to silently overwrite App1's stored signature. Because App2 embeds a lineage that lists the ancestor key as a predecessor, Android treats both apps as sharing the same signing identity and updates App1's record accordingly.
->
-> Two separate apps, signed by different keys and owned by different parties, are now indistinguishable from the system's perspective.
+> Simply installing App2 caused Android to silently overwrite App1's stored signature.
 
 ### Step 3 — Attempt to update App1 (fails)
 
